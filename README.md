@@ -143,11 +143,4 @@ Payment (F110 / F-53)
 | `LFA1` | Vendor Master |
 | `MARA` | Material Master |
 
----
 
-## 👤 Author
-
-**Name:** ______________________  
-**Roll Number:** ______________________  
-**Batch / Program:** ______________________  
-**Institution:** KIIT
