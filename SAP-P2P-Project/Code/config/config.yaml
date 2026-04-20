@@ -1,0 +1,69 @@
+# config.yaml
+# SAP P2P Analytics Project Configuration
+# KIIT Capstone Project | April 2026
+
+project:
+  name: "SAP P2P Data Analytics Engineering"
+  version: "1.0.0"
+  author: "______________________"
+  roll_number: "______________________"
+  batch: "______________________"
+  institution: "KIIT"
+
+sap_connection:
+  # For production SAP RFC connections (pyrfc)
+  # Replace with actual SAP system details
+  ashost: "SAP_HOST"
+  sysnr: "00"
+  client: "100"
+  user: "SAP_USER"
+  passwd: "SAP_PASSWORD"
+  lang: "EN"
+
+database:
+  # Staging database configuration
+  engine: "postgresql"       # or "sqlite" for local dev
+  host: "localhost"
+  port: 5432
+  database: "sap_p2p_staging"
+  schema: "sap_p2p"
+  # For SQLite (local development):
+  # engine: "sqlite"
+  # path: "data/sap_p2p.db"
+
+extraction:
+  company_code: "KIIT"
+  plant: "KT01"
+  purch_org: "KP01"
+  date_range_months: 12          # Extract last N months of data
+  batch_size: 1000               # Records per batch
+  simulate_data: true            # Set false in production SAP environment
+  n_simulated_pos: 200
+
+etl:
+  raw_dir: "data/raw"
+  staging_dir: "data/staging"
+  cleansed_dir: "data/cleansed"
+  analytics_dir: "data/analytics"
+  reports_dir: "reports"
+
+kpis:
+  targets:
+    on_time_delivery_rate: 90.0      # %
+    invoice_first_pass_rate: 95.0    # %
+    blocked_invoice_rate: 5.0        # % (max acceptable)
+    pr_to_po_days: 3                 # days (max acceptable)
+    gr_to_invoice_days: 7            # days (max acceptable)
+    vendor_concentration_limit: 40.0 # % of total spend by single vendor
+
+anomaly_detection:
+  price_deviation_threshold: 0.05    # 5%
+  qty_mismatch_threshold: 0.10       # 10%
+  duplicate_window_days: 30
+  split_po_threshold_inr: 50000      # Approval bypass threshold
+  zscore_threshold: 3.0              # Statistical outlier threshold
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] %(message)s"
+  file: "logs/p2p_pipeline.log"
